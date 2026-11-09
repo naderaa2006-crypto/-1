@@ -1,0 +1,377 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="اكتشف عوالم العمارة والمساحات السكنية بتجربة بصرية مختلفة.">
+  <title>مِعمار | مساحات تستحق الاكتشاف</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="showcase" id="showcase">
+
+  <div class="background-image" id="backgroundImage"></div>
+  <div class="background-overlay"></div>
+
+  <header class="header">
+    <a href="index.html" class="brand">مِعمار<span>.</span></a>
+
+    <nav class="header-nav">
+      <a href="#showcase">الرئيسية</a>
+      <a href="about.html">عن المشروع</a>
+    </nav>
+
+    <a href="about.html" class="header-button">
+      عن مِعمار <span>↗</span>
+    </a>
+  </header>
+
+  <section class="content" id="content">
+    <div class="content-inner">
+
+      <div class="category" id="category">
+        مساحات سكنية استثنائية
+      </div>
+
+      <h1 id="title">
+        حيث يصبح السكن
+        <br>
+        تجربة مختلفة.
+      </h1>
+
+      <p id="description">
+        اكتشف تصاميم تجمع بين الأناقة والراحة،
+        وتفاصيل تصنع الفرق في كل زاوية.
+      </p>
+
+      <a href="about.html" class="visit-button">
+        <span>زيارة</span>
+        <span class="visit-arrow">↗</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="bottom-bar">
+
+    <div class="slide-info">
+      <span class="current-number" id="currentNumber">01</span>
+      <span class="number-divider"></span>
+      <span class="total-number">10</span>
+      <span class="slide-label">مساحة من مجموعة مِعمار</span>
+    </div>
+
+    <div class="navigation">
+      <button class="nav-arrow" id="prevBtn" aria-label="الصورة السابقة">
+        <span>→</span>
+      </button>
+
+      <button class="nav-arrow" id="nextBtn" aria-label="الصورة التالية">
+        <span>←</span>
+      </button>
+    </div>
+
+  </footer>
+
+  <div class="progress-track">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+</main>
+
+<script>
+
+// =================================
+// بيانات الشرائح
+// =================================
+
+const slides = [
+
+  {
+    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2400&q=90",
+    category: "مساحات سكنية استثنائية",
+    title: "حيث يصبح السكن<br>تجربة مختلفة.",
+    description: "اكتشف تصاميم تجمع بين الأناقة والراحة، وتفاصيل تصنع الفرق في كل زاوية."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90",
+    category: "تصميم يعكس شخصيتك",
+    title: "تفاصيل صغيرة،<br>فرق كبير.",
+    description: "مساحات صُممت بعناية لتمنح كل تفصيل قيمته، وكل زاوية حضورها الخاص."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2400&q=90",
+    category: "عمارة معاصرة",
+    title: "حين تلتقي<br>الفخامة بالبساطة.",
+    description: "تكوينات معمارية متوازنة تجمع بين الخطوط الهادئة والحضور اللافت."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=2400&q=90",
+    category: "جمال التفاصيل",
+    title: "الجمال يسكن<br>أدق التفاصيل.",
+    description: "من اختيار المواد إلى توزيع المساحات، لكل تفصيل دوره في صناعة تجربة متكاملة."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=2400&q=90",
+    category: "واجهات معمارية",
+    title: "حضور يلفت<br>من النظرة الأولى.",
+    description: "واجهات تمنح المباني هوية خاصة، وتعكس جمال التصميم من الخارج."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90",
+    category: "رؤية معمارية حديثة",
+    title: "مستقبل السكن<br>يبدأ بفكرة.",
+    description: "تصاميم تستلهم المستقبل وتعيد تقديم مفهوم المساحات العصرية."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=2400&q=90",
+    category: "مساحات ملهمة",
+    title: "مساحة تشبهك،<br>وتفاصيل تليق بك.",
+    description: "تجربة بصرية تستعرض التوازن بين الوظيفة والجمال في التصميم."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2400&q=90",
+    category: "أفكار خارج المألوف",
+    title: "لأن المكان<br>يستحق أن يُكتشف.",
+    description: "أفكار معمارية مختلفة تفتح آفاقاً جديدة للتصميم والعيش."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2400&q=90",
+    category: "تصاميم استثنائية",
+    title: "ما وراء الجدران،<br>تبدأ الحكاية.",
+    description: "اكتشف كيف تتحول المساحات إلى أماكن تحمل طابعاً وتفرداً."
+  },
+
+  {
+    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=2400&q=90",
+    category: "منظور مختلف للعمارة",
+    title: "ليس مجرد مبنى،<br>إنها تجربة.",
+    description: "رحلة بين تصاميم معمارية تلهم الخيال وتمنح المكان معنى مختلفاً."
+  }
+
+];
+
+// =================================
+// عناصر الصفحة
+// =================================
+
+const backgroundImage = document.getElementById("backgroundImage");
+const category = document.getElementById("category");
+const title = document.getElementById("title");
+const description = document.getElementById("description");
+const currentNumber = document.getElementById("currentNumber");
+const progressBar = document.getElementById("progressBar");
+
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+const showcase = document.getElementById("showcase");
+const contentInner = document.querySelector(".content-inner");
+
+// =================================
+// المتغيرات
+// =================================
+
+let currentSlide = 0;
+let requestNumber = 0;
+
+const imageCache = new Map();
+
+// =================================
+// تحميل الصورة
+// =================================
+
+function loadImage(url) {
+
+  if (imageCache.has(url)) {
+    return imageCache.get(url);
+  }
+
+  const promise = new Promise((resolve, reject) => {
+
+    const img = new Image();
+
+    img.onload = () => resolve(url);
+    img.onerror = () => reject(new Error("Image failed"));
+
+    img.src = url;
+
+  });
+
+  imageCache.set(url, promise);
+
+  promise.catch(() => {
+    imageCache.delete(url);
+  });
+
+  return promise;
+}
+
+// =================================
+// تحميل الصور المجاورة
+// =================================
+
+function preloadNearbyImages(index) {
+
+  const next = (index + 1) % slides.length;
+  const previous = (index - 1 + slides.length) % slides.length;
+
+  loadImage(slides[next].image).catch(() => {});
+  loadImage(slides[previous].image).catch(() => {});
+
+}
+
+// =================================
+// عرض الشريحة
+// =================================
+
+async function showSlide(index, initial = false) {
+
+  const thisRequest = ++requestNumber;
+
+  const nextIndex = (index + slides.length) % slides.length;
+  const slide = slides[nextIndex];
+
+  showcase.classList.add("is-loading");
+
+  let imageLoaded = false;
+
+  try {
+
+    await loadImage(slide.image);
+    imageLoaded = true;
+
+  } catch (error) {
+
+    console.warn("تعذر تحميل الصورة:", slide.image);
+
+  }
+
+  // تجاهل أي طلب قديم
+  if (thisRequest !== requestNumber) return;
+
+  if (!initial) {
+
+    backgroundImage.classList.add("fade-out");
+    contentInner.classList.add("text-out");
+
+    await new Promise(resolve => setTimeout(resolve, 250));
+
+    if (thisRequest !== requestNumber) return;
+
+  }
+
+  currentSlide = nextIndex;
+
+  if (imageLoaded) {
+
+    backgroundImage.style.backgroundImage =
+      `url("${slide.image}")`;
+
+  } else {
+
+    backgroundImage.style.backgroundImage = "none";
+
+  }
+
+  category.textContent = slide.category;
+  title.innerHTML = slide.title;
+  description.textContent = slide.description;
+
+  currentNumber.textContent =
+    String(currentSlide + 1).padStart(2, "0");
+
+  progressBar.style.width =
+    ((currentSlide + 1) / slides.length * 100) + "%";
+
+  backgroundImage.classList.remove("fade-out");
+  contentInner.classList.remove("text-out");
+
+  showcase.classList.remove("is-loading");
+
+  preloadNearbyImages(currentSlide);
+
+}
+
+// =================================
+// أزرار التنقل
+// =================================
+
+nextBtn.addEventListener("click", () => {
+  showSlide(currentSlide + 1);
+});
+
+prevBtn.addEventListener("click", () => {
+  showSlide(currentSlide - 1);
+});
+
+// =================================
+// لوحة المفاتيح
+// =================================
+
+document.addEventListener("keydown", event => {
+
+  if (event.key === "ArrowLeft") {
+    showSlide(currentSlide + 1);
+  }
+
+  if (event.key === "ArrowRight") {
+    showSlide(currentSlide - 1);
+  }
+
+});
+
+// =================================
+// السحب على الجوال
+// =================================
+
+let touchStartX = 0;
+
+showcase.addEventListener("touchstart", event => {
+  touchStartX = event.changedTouches[0].screenX;
+}, { passive: true });
+
+showcase.addEventListener("touchend", event => {
+
+  const touchEndX = event.changedTouches[0].screenX;
+  const distance = touchEndX - touchStartX;
+
+  if (Math.abs(distance) > 55) {
+
+    if (distance > 0) {
+      showSlide(currentSlide - 1);
+    } else {
+      showSlide(currentSlide + 1);
+    }
+
+  }
+
+}, { passive: true });
+
+// =================================
+// تشغيل الموقع
+// =================================
+
+showSlide(0, true);
+
+</script>
+
+</body>
+</html>
+```
